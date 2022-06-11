@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
+    <script src="https:// cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <title>{% block title_block %} Social {% endblock %} </title>
+
+        {% block css_block %}
+
+        {% endblock %}
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href= "{% url 'App_Posts:home' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+        &nbsp; &nbsp; &nbsp; &nbsp;
+        <form class="form-inline" method="GET">
+        <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search">
+         <button class="btn btn-success" type="submit">Search</button>
+     </form>
+      <li class="nav-item">
+        <a class="nav-link"  href="{% url 'App_login:logout' %}">Logout</a>
+      </li>
+
+      <li class="nav-item">
+          {% if user.user_profile.profile_pic %}
+          <a class="nav-link" href="{% url 'App_login:profile' %}"><img src="/media/{{user.user_profile.profile_pic }}" width="50px" height="50px" class="rounded-circle"> </a>
+          {% else %}
+          <a class="nav-link" href="{% url 'App_login:profile' %}"><img src="/media/default.jpg" width="50px" class="rounded-circle"> </a>
+          {% endif %}
+      </li>
+    </ul>
+
+</nav>
+
+
+<div class="container" style=" padding-top:30px">
+    {% block body_block %}
+
+    {% endblock %}
+
+</div>
+
+</body>
+</html>
